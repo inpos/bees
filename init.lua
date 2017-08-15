@@ -43,7 +43,7 @@
 
 --NODES
   minetest.register_node('bees:extractor', {
-    description = 'honey extractor',
+    description = 'Экстрактор мёда',
     tiles = {"bees_extractor.png", "bees_extractor.png", "bees_extractor.png", "bees_extractor.png", "bees_extractor.png", "bees_extractor_front.png"},
     paramtype2 = "facedir",
     groups = {choppy=2,oddly_breakable_by_hand=2,tubedevice=1,tubedevice_receiver=1},
@@ -155,7 +155,7 @@
   })
 
   minetest.register_node('bees:bees', {
-    description = 'flying bees',
+    description = 'Летающие пчёлы',
     drawtype = 'plantlike',
     paramtype = 'light',
     groups = { not_in_creative_inventory=1 },
@@ -176,7 +176,7 @@
   })
 
   minetest.register_node('bees:hive_wild', {
-    description = 'wild bee hive',
+    description = 'Улей диких пчёл',
     tiles = {'bees_hive_wild.png','bees_hive_wild.png','bees_hive_wild.png', 'bees_hive_wild.png', 'bees_hive_wild_bottom.png'}, --Neuromancer's base texture
     drawtype = 'nodebox',
     paramtype = 'light',
@@ -207,7 +207,7 @@
       local flowers = minetest.find_nodes_in_area(minp, maxp, 'group:flower')
       if #flowers == 0 then 
         inv:set_stack('queen', 1, '')
-        meta:set_string('infotext', 'this colony died, not enough flowers in area')
+        meta:set_string('infotext', 'Эта колония погибла, недостаточно цветов в округе')
         return 
       end --not any flowers nearby The queen dies!
       if #flowers < 3 then return end --requires 2 or more flowers before can make honey
@@ -304,7 +304,7 @@
   })
 
   minetest.register_node('bees:hive_artificial', {
-    description = 'bee hive',
+    description = 'Пчелиный улей',
     tiles = {'default_wood.png','default_wood.png','default_wood.png', 'default_wood.png','default_wood.png','bees_hive_artificial.png'},
     drawtype = 'nodebox',
     paramtype = 'light',
@@ -372,10 +372,10 @@
               end
             end
           else
-            meta:set_string('infotext', 'progress: '..progress..'+'..#flowers..'/1000')
+            meta:set_string('infotext', 'Прогресс: '..progress..'+'..#flowers..'/1000')
           end
         else
-          meta:set_string('infotext', 'does not have empty frame(s)')
+          meta:set_string('infotext', 'Нет пустых рамок')
           timer:stop()
         end
       end
@@ -384,7 +384,7 @@
       if listname == 'queen' then
         local timer = minetest.get_node_timer(pos)
         local meta = minetest.get_meta(pos)
-        meta:set_string('infotext','requires queen bee to function')
+        meta:set_string('infotext','Необходимо, чтобы пчелиная матка функционировала')
         timer:stop()
       end
     end,
@@ -406,10 +406,10 @@
       local timer = minetest.get_node_timer(pos)
       if listname == 'queen' or listname == 'frames' then
         meta:set_string('queen', stack:get_name())
-        meta:set_string('infotext','queen is inserted, now for the empty frames');
+        meta:set_string('infotext','Пчелиная матка добавлена, теперь для пустых рамок');
         if inv:contains_item('frames', 'bees:frame_empty') then
           timer:start(30)
-          meta:set_string('infotext','bees are aclimating');
+          meta:set_string('infotext','пчелы акклиматизируются');
         end
       end
     end,
@@ -484,39 +484,39 @@
 
 --ITEMS
   minetest.register_craftitem('bees:frame_empty', {
-    description = 'empty hive frame',
+    description = 'Пустая рамка улья',
     inventory_image = 'bees_frame_empty.png',
     stack_max = 24,
   })
 
   minetest.register_craftitem('bees:frame_full', {
-    description = 'filled hive frame',
+    description = 'Заполненная рамка улья',
     inventory_image = 'bees_frame_full.png',
     stack_max = 12,
   })
 
   minetest.register_craftitem('bees:bottle_honey', {
-    description = 'honey bottle',
+    description = 'Бутылка с мёдом',
     inventory_image = 'bees_bottle_honey.png',
     stack_max = 12,
     on_use = minetest.item_eat(3, "vessels:glass_bottle"),
   })
   
   minetest.register_craftitem('bees:wax', {
-    description = 'bees wax',
+    description = 'Пчелиный воск',
     inventory_image = 'bees_wax.png',
     stack_max = 48,
   })
 
   minetest.register_craftitem('bees:honey_comb', {
-    description = 'honey comb',
+    description = 'Соты',
     inventory_image = 'bees_comb.png',
     on_use = minetest.item_eat(2),
     stack_max = 8,
   })
 
   minetest.register_craftitem('bees:queen', {
-    description = 'Queen Bee',
+    description = 'Пчелиная матка',
     inventory_image = 'bees_particle_bee.png',
     stack_max = 1,
   })
@@ -578,7 +578,7 @@
 
 --TOOLS
   minetest.register_tool('bees:smoker', {
-    description = 'smoker',
+    description = 'Дымарь',
     inventory_image = 'bees_smoker.png',
     tool_capabilities = {
       full_punch_interval = 3.0,
@@ -610,7 +610,7 @@
   })
 
   minetest.register_tool('bees:grafting_tool', {
-    description = 'grafting tool',
+    description = 'Привиочный инструмент',
     inventory_image = 'bees_grafting_tool.png',
     tool_capabilities = {
       full_punch_interval = 3.0,
@@ -649,7 +649,7 @@
   --PIPEWORKS
     if minetest.get_modpath("pipeworks") then
       minetest.register_node('bees:hive_industrial', {
-        description = 'industrial bee hive',
+        description = 'Промышленный пчелиный улей',
         tiles = { 'bees_hive_industrial.png'},
         paramtype2 = 'facedir',
         groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,tubedevice=1,tubedevice_receiver=1},
@@ -666,7 +666,7 @@
                 inv:set_stack("frames", i, stack)
                 local timer = minetest.get_node_timer(pos)
                 timer:start(30)
-                meta:set_string('infotext','bees are aclimating')
+                meta:set_string('infotext','пчелы акклиматизируются')
                 return ItemStack("")
               end
             end
@@ -702,7 +702,7 @@
           meta:set_int('agressive', 1)
           inv:set_size('queen', 1)
           inv:set_size('frames', 8)
-          meta:set_string('infotext','requires queen bee to function')
+          meta:set_string('infotext','Необходимо, чтобы пчелиная матка функционировала')
         end,
         on_rightclick = function(pos, node, clicker, itemstack)
           minetest.show_formspec(
@@ -745,10 +745,10 @@
                   end
                 end
               else
-                meta:set_string('infotext', 'progress: '..progress..'+'..#flowers..'/1000')
+                meta:set_string('infotext', 'Прогресс: '..progress..'+'..#flowers..'/1000')
               end
             else
-              meta:set_string('infotext', 'does not have empty frame(s)')
+              meta:set_string('infotext', 'Нет пустых рамок')
               timer:stop()
             end
           end
@@ -757,7 +757,7 @@
           if listname == 'queen' then
             local timer = minetest.get_node_timer(pos)
             local meta = minetest.get_meta(pos)
-            meta:set_string('infotext','requires queen bee to function')
+            meta:set_string('infotext','Необходимо, чтобы пчелиная матка функционировала')
             timer:stop()
           end
         end,
@@ -779,10 +779,10 @@
           local timer = minetest.get_node_timer(pos)
           if listname == 'queen' or listname == 'frames' then
             meta:set_string('queen', stack:get_name())
-            meta:set_string('infotext','queen is inserted, now for the empty frames');
+            meta:set_string('infotext','Пчелиная матка добавлена, теперь для пустых рамок');
             if inv:contains_item('frames', 'bees:frame_empty') then
               timer:start(30)
-              meta:set_string('infotext','bees are aclimating');
+              meta:set_string('infotext','пчелы акклиматизируются');
             end
           end
         end,
